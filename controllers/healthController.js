@@ -1,9 +1,7 @@
+const { successResponse } = require('../utils/response');
+
 const getHealth = (req, res) => {
-  res.json({
-    success: true,
-    message: 'Server is healthy',
-    timestamp: new Date().toISOString()
-  });
+  successResponse(res, 'Server is healthy', { timestamp: new Date().toISOString() });
 };
 
 module.exports = {

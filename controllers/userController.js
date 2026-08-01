@@ -1,36 +1,16 @@
 const userService = require('../services/userService');
+const asyncHandler = require('../utils/asyncHandler');
+const { successResponse } = require('../utils/response');
 
-const getUsers = async (req, res) => {
-  try {
-    const users = await userService.getUsers();
-    res.json({
-      success: true,
-      message: 'Users fetched successfully',
-      data: users
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await userService.getUsers();
+  successResponse(res, 'Users fetched successfully', users);
+});
 
-const createUser = async (req, res) => {
-  try {
-    const user = await userService.createUser(req.body);
-    res.status(201).json({
-      success: true,
-      message: 'User created successfully',
-      data: user
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
+const createUser = asyncHandler(async (req, res) => {
+  const user = await userService.createUser(req.body);
+  successResponse(res, 'User created successfully', user, 201);
+});
 
 module.exports = {
   getUsers,
