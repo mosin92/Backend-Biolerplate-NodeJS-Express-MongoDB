@@ -1,6 +1,6 @@
-const userService = require('../services/userService');
-const asyncHandler = require('../utils/asyncHandler');
-const { successResponse } = require('../utils/response');
+import * as userService from 'services/userService';
+import asyncHandler from 'utils/asyncHandler';
+import { successResponse } from 'utils/response';
 
 const getUsers = asyncHandler(async (req, res) => {
   const users = await userService.getUsers();
@@ -12,7 +12,4 @@ const createUser = asyncHandler(async (req, res) => {
   successResponse(res, 'User created successfully', user, 201);
 });
 
-module.exports = {
-  getUsers,
-  createUser
-};
+export { getUsers, createUser };

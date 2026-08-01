@@ -1,14 +1,14 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const compression = require('compression');
-const rateLimit = require('express-rate-limit');
-const mongoSanitize = require('express-mongo-sanitize');
-const config = require('./config');
-const healthRoutes = require('./routes/healthRoutes');
-const userRoutes = require('./routes/userRoutes');
-const errorHandler = require('./middleware/errorHandler');
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import compression from 'compression';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import config from 'config';
+import healthRoutes from 'routes/healthRoutes';
+import userRoutes from 'routes/userRoutes';
+import errorHandler from 'middleware/errorHandler';
 
 const app = express();
 
@@ -32,10 +32,10 @@ const apiLimiter = rateLimit({
 });
 app.use('/api', apiLimiter);
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.json({
     success: true,
-    message: 'API is running',
+    message: 'API is running!',
     version: '1.0.0'
   });
 });
@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 app.use('/api/health', healthRoutes);
 app.use('/api/users', userRoutes);
 
-app.use((req, res) => {
+app.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
     message: 'Route not found'
@@ -52,4 +52,4 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

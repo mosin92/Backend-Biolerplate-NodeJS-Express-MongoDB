@@ -1,8 +1,9 @@
-const { BadRequestError } = require('../utils/errors');
+import { Request, Response, NextFunction } from 'express';
+import { BadRequestError } from 'utils/errors';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const validateUser = (req, res, next) => {
+const validateUser = (req: Request, res: Response, next: NextFunction): void => {
   const { name, email } = req.body;
 
   if (!name || typeof name !== 'string' || !name.trim()) {
@@ -16,6 +17,4 @@ const validateUser = (req, res, next) => {
   next();
 };
 
-module.exports = {
-  validateUser
-};
+export { validateUser };

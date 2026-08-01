@@ -1,4 +1,4 @@
-const AppError = require('./AppError');
+import AppError from './AppError';
 
 class ConflictError extends AppError {
   constructor(message = 'Resource already exists') {
@@ -6,4 +6,4 @@ class ConflictError extends AppError {
   }
 }
 
-module.exports = ConflictError;
+export default ConflictError;

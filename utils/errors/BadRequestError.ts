@@ -1,4 +1,4 @@
-const AppError = require('./AppError');
+import AppError from './AppError';
 
 class BadRequestError extends AppError {
   constructor(message = 'Bad request') {
@@ -6,4 +6,4 @@ class BadRequestError extends AppError {
   }
 }
 
-module.exports = BadRequestError;
+export default BadRequestError;

@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
+import { Server } from 'http';
+import mongoose from 'mongoose';
 
-const registerProcessHandlers = (server) => {
-  const shutdown = (signal) => {
+const registerProcessHandlers = (server: Server): void => {
+  const shutdown = (signal: string): void => {
     console.log(`${signal} received, shutting down gracefully`);
     server.close(async () => {
       await mongoose.connection.close();
@@ -24,4 +25,4 @@ const registerProcessHandlers = (server) => {
   });
 };
 
-module.exports = registerProcessHandlers;
+export default registerProcessHandlers;
